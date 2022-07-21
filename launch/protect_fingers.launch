@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="L_INDEX_JOINT_NAME"  default="hand_left_index_joint"/>
+    <arg name="R_INDEX_JOINT_NAME"  default="hand_right_index_joint"/>
+    <arg name="L_MRL_JOINT_NAME"    default="hand_left_mrl_joint"/>
+    <arg name="R_MRL_JOINT_NAME"    default="hand_right_mrl_joint"/>
+    <arg name="L_THUMB_JOINT_NAME"  default="hand_left_thumb_joint"/>
+    <arg name="R_THUMB_JOINT_NAME"  default="hand_right_thumb_joint"/>
+    
+    <arg name="L_INDEX_JOINT_POS"   default="4.5"/>
+    <arg name="R_INDEX_JOINT_POS"   default="4.5"/>
+    <arg name="L_MRL_JOINT_POS"     default="5.0"/>
+    <arg name="R_MRL_JOINT_POS"     default="5.0"/>
+    <arg name="L_THUMB_JOINT_POS"   default="4.5"/>
+    <arg name="R_THUMB_JOINT_POS"   default="4.5"/>
+    
+    <arg name="TIME" default="3.0"/>
+    <arg name="node_start_delay_1" default="3.5" />
+    <arg name="node_start_delay_2" default="7.0" /> 
+
+	<node name="$(anon move_left_index)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg L_INDEX_JOINT_NAME) $(arg L_INDEX_JOINT_POS) $(arg TIME) '
+        output="screen"/>
+
+    <node name="$(anon move_right_index)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg R_INDEX_JOINT_NAME) $(arg R_INDEX_JOINT_POS) $(arg TIME) '
+        output="screen"/>
+
+	<node name="$(anon move_left_mrl)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg L_MRL_JOINT_NAME) $(arg L_MRL_JOINT_POS) $(arg TIME) '
+        output="screen"  
+        launch-prefix="bash -c 'sleep $(arg node_start_delay_1); $0 $@' "/>
+
+    <node name="$(anon move_right_mrl)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg R_MRL_JOINT_NAME) $(arg R_MRL_JOINT_POS) $(arg TIME) '
+        output="screen"
+        launch-prefix="bash -c 'sleep $(arg node_start_delay_1); $0 $@' "/>
+
+	<node name="$(anon move_left_thumb)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg L_THUMB_JOINT_NAME) $(arg L_THUMB_JOINT_POS) $(arg TIME) '
+        output="screen"
+        launch-prefix="bash -c 'sleep $(arg node_start_delay_2); $0 $@' "/>
+
+    <node name="$(anon move_right_thumb)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg R_THUMB_JOINT_NAME) $(arg R_THUMB_JOINT_POS) $(arg TIME) '
+        output="screen"
+        launch-prefix="bash -c 'sleep $(arg node_start_delay_2); $0 $@' "/>        
+    
+</launch>

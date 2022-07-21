@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- 
+
+    Node to excite the motors of the arms for parameter estimation.
+
+    1.- Run the default controllers or the joint trakectory controllers
+
+        With balancer
+
+        $ roslaunch reemc_controller_configuration default_controllers.launch
+
+        Without balancer
+        $ roslaunch reemc_controller_configuration joint_trajectory_controllers.launch
+
+    Then run this launchfile
+-->
+
+
+
+    <arg name="ns" default="/h1" /> 
+    
+    <group ns="$(arg ns)">
+        <rosparam command="load" file="$(find arm_excitation)/config/arm_calibration.yaml"/>
+        
+  	    <node name="arm_calibration" pkg="arm_excitation" type="arm_excitation" 
+ 	          args="$(arg ns)" output="screen">
+        </node>
+
+    </group>
+</launch>

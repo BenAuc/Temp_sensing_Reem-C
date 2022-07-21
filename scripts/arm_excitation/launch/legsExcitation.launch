@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- 
+
+    Node to excite the motors of the legs for tracking test.
+
+    1.- Run the joint trajectory controllers with fast state publisher.
+
+    $ roslaunch arm_excitation joitn_trajectory_controllers_fast_pub.launch
+
+    2.- Then run this launchfile
+
+    3.- Record bag for legs rosbag record /right_leg_controller/state /left_leg_controller/state -O data
+
+-->
+
+    <arg name="ns1" default="/h1/leftLeg" />
+    <arg name="ns2" default="/h1/rightLeg" /> 
+    
+    <group ns="$(arg ns1)">
+        <rosparam command="load" file="$(find arm_excitation)/config/left_leg_excitation.yaml"/>
+        
+  	    <node name="LL_excitation" pkg="arm_excitation" type="arm_excitation_cont" 
+ 	          args="$(arg ns1)" output="screen">
+        </node>
+    </group>
+
+    <group ns="$(arg ns2)">
+        <rosparam command="load" file="$(find arm_excitation)/config/right_leg_excitation.yaml"/>
+        
+  	    <node name="RL_excitation" pkg="arm_excitation" type="arm_excitation_cont" 
+ 	          args="$(arg ns2)" output="screen">
+        </node>
+    </group>
+
+</launch>

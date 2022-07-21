@@ -9,11 +9,7 @@
     </include>
 
     <!--run the node receiving the temperature readings-->
-    <node name="TempReceiverNode" pkg="finger_temperature_sensing" type="temperature_receiver_node.py"
+    <node name="TempReceiverNode" pkg="finger_temperature_sensing" type="reemc_pullback_node.py"
 	output="screen" respawn="true"/>
-
-    <!-- launch the node controlling the motions of the reemc-->
-    <!-- <node name="ReemcControllerNode" pkg="finger_temperature_sensing" type="reemc_controller_node.py"
-	output="screen" respawn="true"/> -->
 
 </launch>

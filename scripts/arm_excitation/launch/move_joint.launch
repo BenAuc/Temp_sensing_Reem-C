@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="JOINT_NAME" default="arm_right_1_joint"/>
+    <arg name="JOINT_POS" default="0.0"/>
+    <arg name="TIME" default="5.0"/>
+        
+    <node name="$(anon move_right_arm)" 
+        pkg="play_motion" 
+        type="move_joint" 
+        args='$(arg JOINT_NAME) $(arg JOINT_POS) $(arg TIME) '
+        output="screen"/>
+
+</launch>
+
+
+<!--
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_left_1_joint JOINT_POS:=1.6
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=5 JOINT_NAME:=arm_left_1_joint JOINT_POS:=-0.44
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=20 JOINT_NAME:=arm_left_2_joint JOINT_POS:=1.6
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_left_2_joint JOINT_POS:=0.17
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_left_3_joint JOINT_POS:=1.9
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_left_3_joint JOINT_POS:=0.0
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_left_4_joint JOINT_POS:=2.0
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_left_4_joint JOINT_POS:=0.88
+
+
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_right_1_joint JOINT_POS:=1.6
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_right_1_joint JOINT_POS:=-0.44
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=20 JOINT_NAME:=arm_right_2_joint JOINT_POS:=1.6
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=5 JOINT_NAME:=arm_right_2_joint JOINT_POS:=0.17
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_right_3_joint JOINT_POS:=1.9
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_right_3_joint JOINT_POS:=0.0
+
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_right_4_joint JOINT_POS:=2.0
+roslaunch tum_ics_h1_tools move_joint.launch TIME:=10 JOINT_NAME:=arm_right_4_joint JOINT_POS:=0.88
+
+-->
