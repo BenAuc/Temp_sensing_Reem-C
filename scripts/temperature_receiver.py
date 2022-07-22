@@ -1,7 +1,6 @@
 #!/usr/bin/env python 
    
 import socket
-import time
 from tkinter.messagebox import NO
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,12 +12,15 @@ print("script started")
 string_split = '//'
 string_begin_end = '??'
 data = None
-nb_samples = 50
+nb_samples = 10000
 nb_sensors = 3
-time_series = np.zeros((nb_samples, nb_sensors))
+time_series = np.zeros((10000, nb_sensors))
+times = np.zeros(10000)
+acquisition_time = 75 # seconds
+dt = acquisition_time / nb_samples
 
 # socket parameters of receiver
-UDP_IP = "192.168.1.147" # IP of PC
+UDP_IP = "192.168.1.148" # IP of PC
 UDP_PORT = 7777
 
 # open socket on receiver's end
@@ -26,23 +28,27 @@ sock = socket.socket(socket.AF_INET, # Internet
                         socket.SOCK_DGRAM) # UDP
 sock.bind((UDP_IP, UDP_PORT))
 # set 1 sec. timeout on data reception
-sock.settimeout(1)
+sock.settimeout(2)
 
 # loop until x packages are acquired just for the sake of testing
 counter = 0
 
 start = time.time()
 
-while counter < nb_samples:
+while True:
     # print("waiting for package")
-
+    data=None
     # incoming data package is received
     try:
         data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
     except socket.timeout:
         pass
 
-    # print("timeout")
+    delta = time.time() - start
+    print("end - start :", delta)
+    if (delta> acquisition_time):
+        break
+        print("timeout")
 
     if data is not None:
     
@@ -55,30 +61,22 @@ while counter < nb_samples:
         temp_reading_list = temp_string.split(string_split)
         print("list: ", temp_reading_list)
         time_series[counter, :] = np.array(temp_reading_list)
+        times[counter] = delta
+
+        counter+=1
 
         # for reading in temp_reading_list:
         #     print("reading : ", reading)
         
         # short pause
-        #time.sleep(1)
-        counter += 1
+        time.sleep(dt)
 
-end = time.time()
-elapsed_time = end - start
-time_range = np.linspace(0, elapsed_time, num = time_series.shape[0])
-data = {'temperature' : time_series, 'time' : time_range}
-np.save("./data", data)
 
-# fig, ax = plt.subplots(1,1)
-# fig.set_figwidth(12)
+elapsed_time = delta
+print("elapsed_time :", elapsed_time)
+time_range = np.linspace(0, elapsed_time, counter)
+data = time_series
 
-# for sensor in range(0,nb_sensors):
-#     ax.plot(time_range, time_series[:, sensor], label="sensor # " + str(sensor))
-    
-# ax.set_title("Temperature")
-# ax.legend(loc='upper right')
-# ax.set_xlabel("time (s)")
-# ax.set_ylabel("Temperature (C)")
-# plt.show
+np.save("./data.npy", data[:counter,:])
+np.save("./time_range.npy", time_range)
 
-# time.sleep(5)
