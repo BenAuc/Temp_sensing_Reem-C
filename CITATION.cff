@@ -10,11 +10,12 @@ message: >-
   as given here
 type: software
 authors:
-  - name-particle: Benoit
-    family-names: Auclair
-    email: benoitauclair30@gmail.com
-    affiliation: >-
-      Student M.Sc. Neuroengineering, Technical
-      University Munich
+authors:
+- family-names: "Auclair"
+  given-names: "Benoit"
+  email: benoitauclair30@gmail.com
+  affiliation: >-
+    Student M.Sc. Neuroengineering, Technical
+    University Munich
 date-released: 2022-07-23
 url: "https://github.com/BenAuc/Temp_sensing_Reem-C"
