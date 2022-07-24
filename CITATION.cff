@@ -1,0 +1,21 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Integrating temperature sensing to a Reem-C's
+  fingers
+message: >-
+  Please cite the work contained in this repository
+  as given here
+type: software
+authors:
+authors:
+- family-names: "Auclair"
+  given-names: "Benoit"
+  email: benoitauclair30@gmail.com
+  affiliation: >-
+    Student M.Sc. Neuroengineering, Technical
+    University Munich
+date-released: 2022-07-23
+url: "https://github.com/BenAuc/Temp_sensing_Reem-C"
